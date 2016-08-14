@@ -20,6 +20,8 @@ ABOUT-NLS
 Makefile
 Makefile.in
 
+po/Makefile.in.in
+
 /configure.lineno
 /aclocal.m4
 /autom4te.cache
