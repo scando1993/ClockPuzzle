@@ -41,3 +41,9 @@ Makefile.in
 
 /gnome-doc-utils.make
 
+.anjuta/
+.anjuta_sym_db.db
+
+Debug/
+
+clock_puzzle.anjuta
