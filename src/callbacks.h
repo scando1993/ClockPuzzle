@@ -25,6 +25,7 @@
  */
 
 #include "dependencies.h"
+#include "game.h"
 
 extern GtkBuilder *builder;
 

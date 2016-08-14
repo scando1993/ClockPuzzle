@@ -35,7 +35,8 @@ main (int argc, char *argv[])
 {
  	GtkWidget *window;
 
-
+	srand(time(NULL));
+	
 #ifdef G_OS_WIN32
 	gchar *prefix = g_win32_get_package_installation_directory_of_module (NULL);
 	gchar *localedir = g_build_filename (prefix, "share", "locale", NULL);

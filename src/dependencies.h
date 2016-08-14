@@ -30,7 +30,9 @@
 #include <clutter-gtk/clutter-gtk.h>
 
 #include <glib/gi18n.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 gint WINDOW_WIDTH;
 gint WINDOW_HEIGHT;
-

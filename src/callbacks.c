@@ -72,6 +72,8 @@ btnNewMnuVtnPrincipal_clicked_cb(GtkButton *button,
 	gtk_revealer_set_reveal_child (GTK_REVEALER(revealer),FALSE);
 	
 	gtk_revealer_set_reveal_child (GTK_REVEALER(revealer2),TRUE);
+
+	new_game();
 }
 
 void 

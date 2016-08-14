@@ -25,9 +25,13 @@
  */
 
 #include "dependencies.h"
-#include "main_window.h"
 
+ 
 extern GtkBuilder *builder;
+static ClutterActor *stage;
+
+GtkWidget* create_stage();
 
 void new_game();
 
+void generate_clock(gint stages);

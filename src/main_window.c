@@ -44,16 +44,8 @@ GtkWidget* create_window (void){
 				UI_FILE);
         }
 
+	GtkWidget *clutterStage = create_stage();
 	
-	ClutterColor stage_color = { 0, 0, 0, 255 };
-
-	GtkWidget *clutterStage = gtk_clutter_embed_new ();
-	
-    ClutterActor *stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED(clutterStage));
-
-	gtk_widget_set_size_request (clutterStage, 512, 512);
-    clutter_actor_set_background_color (stage, &stage_color);
-
 	GtkRevealer *revealer = GTK_REVEALER(GTK_WIDGET (gtk_builder_get_object (builder,"RvlStageMnuPrincipal")));
 
 	gtk_container_add (GTK_CONTAINER(revealer),clutterStage);
