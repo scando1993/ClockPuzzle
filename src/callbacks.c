@@ -32,6 +32,15 @@ on_window_destroy (GtkWidget *widget, gpointer data)
 	gtk_main_quit ();
 }
 
+void 
+VentanaPrincipal_configure_event_cb(GtkWindow *window,
+                                    GdkEvent *event,
+                                    gpointer data){
+
+	gtk_window_get_size (window,&WINDOW_WIDTH,&WINDOW_HEIGHT);
+
+}
+
 void btnMnuVtnPrincipalSettings_activate_cb(GtkMenuItem *menuitem,
                                             gpointer     user_data){
 
@@ -46,13 +55,23 @@ void btnMnuVtnPrincipalAbout_activate_cb(GtkMenuItem *menuitem,
 
 	GtkWidget *window;
 	
-	window = GTK_WIDGET (gtk_builder_get_object (builder, "Settings"));
+	window = GTK_WIDGET (gtk_builder_get_object (builder, "About"));
 	gtk_widget_show (window);
 }
 
 void 
 btnNewMnuVtnPrincipal_clicked_cb(GtkButton *button,
                                  gpointer user_data){
+
+	GtkWidget *revealer, *revealer2;
+	
+	revealer = GTK_WIDGET (gtk_builder_get_object (builder, "RvlMnuVtnPrincipal"));
+
+	revealer2 = GTK_WIDGET (gtk_builder_get_object (builder, "RvlStageMnuPrincipal"));
+	
+	gtk_revealer_set_reveal_child (GTK_REVEALER(revealer),FALSE);
+	
+	gtk_revealer_set_reveal_child (GTK_REVEALER(revealer2),TRUE);
 }
 
 void 
@@ -63,4 +82,5 @@ btnLoadMnuVtnPrincipal_clicked_cb(GtkButton *button,
 void 
 btnExitMnuVtnPrincipal_clicked_cb(GtkButton *button,
                                  gpointer user_data){
+	gtk_main_quit();
 }

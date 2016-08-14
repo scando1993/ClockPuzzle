@@ -25,7 +25,9 @@ clock_puzzle_SOURCES = \
 	callbacks.h \
 	dependencies.h \
 	main_window.c \
-	main_window.h
+	main_window.h \
+	game.c \
+	game.h
 
 
 clock_puzzle_LDFLAGS =

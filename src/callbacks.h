@@ -28,9 +28,16 @@
 
 extern GtkBuilder *builder;
 
+extern gint WINDOW_WIDTH;
+extern gint WINDOW_HEIGHT;
+
+
 //CallBacks para las acciones de la ventana principal
 void
 on_window_destroy (GtkWidget *widget, gpointer data);
+
+void 
+VentanaPrincipal_configure_event_cb(GtkWindow *window,GdkEvent *event,gpointer data);
 
 //Callbacks para las funciones del menu de la ventana principal
 void 

@@ -1,12 +1,12 @@
 /***************************************************************************
- *            dependencies.h
+ *            game.c
  *
- *  Sun August 14 05:37:05 2016
+ *  Sun August 14 10:14:04 2016
  *  Copyright  2016  kevin cando
  *  <user@host>
  ****************************************************************************/
 /*
- * dependencies.h
+ * game.c
  *
  * Copyright (C) 2016 - kevin cando
  *
@@ -24,13 +24,4 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <config.h>
-#include <gtk/gtk.h>
-#include <clutter/clutter.h>
-#include <clutter-gtk/clutter-gtk.h>
-
-#include <glib/gi18n.h>
-
-gint WINDOW_WIDTH;
-gint WINDOW_HEIGHT;
-
+#include "game.h"

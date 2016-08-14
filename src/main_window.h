@@ -39,5 +39,8 @@
 #endif
 #define TOP_WINDOW "VentanaPrincipal"
 
+extern gint WINDOW_WIDTH;
+extern gint WINDOW_HEIGHT;
+
 //Metodo para crear la ventana principal
 GtkWidget* create_window (void);

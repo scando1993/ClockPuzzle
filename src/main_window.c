@@ -54,17 +54,12 @@ GtkWidget* create_window (void){
 	gtk_widget_set_size_request (clutterStage, 512, 512);
     clutter_actor_set_background_color (stage, &stage_color);
 
-	GtkBox *vbox =GTK_BOX(GTK_WIDGET (gtk_builder_get_object (builder,"VBoxVtnPrincipal")));
-    if (!vbox)
-    {
-            g_critical ("Widget \"%s\" is missing in file %s.",
-			TOP_WINDOW,
-			UI_FILE);
-    }
-	gtk_box_pack_start (vbox,clutterStage,TRUE,TRUE,0);
+	GtkRevealer *revealer = GTK_REVEALER(GTK_WIDGET (gtk_builder_get_object (builder,"RvlStageMnuPrincipal")));
+
+	gtk_container_add (GTK_CONTAINER(revealer),clutterStage);
 	
 //	g_object_unref (builder);
-
+	g_signal_connect(G_OBJECT(window), "configure-event",G_CALLBACK(VentanaPrincipal_configure_event_cb), NULL);
 
 #if !defined(TEST) && defined(G_OS_WIN32)
 	g_free (prefix);

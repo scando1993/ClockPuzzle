@@ -28,17 +28,21 @@ Author: Kevin Cando
   <!-- interface-description This is a version of a game based in the mini-game presented in Final Fantasy XII -->
   <!-- interface-copyright Kevin Cando -->
   <!-- interface-authors Kevin Cando -->
-  <object class="GtkAboutDialog" id="AcercaDe">
+  <object class="GtkAboutDialog" id="About">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">About</property>
+    <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="program_name">Clock Puzzle</property>
     <property name="version">1.0.0</property>
     <property name="copyright" translatable="yes">Kevin Cando</property>
     <property name="comments" translatable="yes">This game is based in another mini-game </property>
+    <property name="website">https://github.com/scando1993/ClockPuzzle</property>
+    <property name="website_label" translatable="yes">Clock Puzzle</property>
     <property name="authors">Kevin Cando</property>
     <property name="logo_icon_name">help-about</property>
     <property name="license_type">gpl-3-0</property>
+    <signal name="activate-link" handler="gtk_widget_destroy" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -56,7 +60,7 @@ Author: Kevin Cando
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
                 <property name="always_show_image">True</property>
-                <signal name="clicked" handler="gtk_widget_destroy" object="AcercaDe" swapped="no"/>
+                <signal name="clicked" handler="gtk_widget_destroy" object="About" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -435,13 +439,19 @@ Author: Kevin Cando
       </object>
     </child>
   </object>
+  <object class="GtkLabel" id="label1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="label" translatable="yes">label</property>
+  </object>
   <object class="GtkWindow" id="VentanaPrincipal">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Clock Puzzle</property>
-    <property name="default_width">500</property>
-    <property name="default_height">400</property>
+    <property name="default_width">800</property>
+    <property name="default_height">600</property>
     <property name="hide_titlebar_when_maximized">True</property>
+    <signal name="configure-event" handler="VentanaPrincipal_configure_event_cb" swapped="no"/>
     <signal name="destroy" handler="on_window_destroy" swapped="no"/>
     <child>
       <object class="GtkBox" id="VBoxVtnPrincipal">
@@ -532,7 +542,6 @@ Author: Kevin Cando
                         <property name="label">Change Background Color</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">__glade_unnamed_54</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                       </object>
@@ -542,7 +551,6 @@ Author: Kevin Cando
                         <property name="label">Change Number Font</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">__glade_unnamed_55</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                       </object>
@@ -606,7 +614,6 @@ Author: Kevin Cando
                         <property name="label">Game Rules &amp; Tutorial</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">__glade_unnamed_53</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                       </object>
@@ -643,9 +650,47 @@ Author: Kevin Cando
           <object class="GtkToolbar" id="ToolbarVtnPrincipal">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_bottom">20</property>
-            <property name="toolbar_style">both-horiz</property>
-            <property name="icon_size">2</property>
+            <property name="toolbar_style">both</property>
+            <property name="icon_size">1</property>
+            <child>
+              <object class="GtkMenuToolButton" id="menutool">
+                <property name="can_focus">False</property>
+                <property name="label_widget">label1</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparatorToolItem">
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton">
+                <property name="can_focus">False</property>
+                <property name="icon_name">applications-other</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton">
+                <property name="can_focus">False</property>
+                <property name="icon_name">application-exit</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -664,6 +709,7 @@ Author: Kevin Cando
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
+                <property name="homogeneous">True</property>
                 <child>
                   <object class="GtkButton" id="btnNewMnuVtnPrincipal">
                     <property name="label" translatable="yes">New Game</property>
@@ -711,7 +757,7 @@ Author: Kevin Cando
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
