@@ -53,7 +53,9 @@ AM_CONDITIONAL(NATIVE_WIN32, test x"$native_win32" = "xyes")
 LT_INIT([win32-dll])
 
 
-PKG_CHECK_MODULES(CLOCK_PUZZLE, [gtk+-3.0 gtk-doc check libcanberra-gtk3 json-glib-1.0 clutter-gtk-1.0 clutter-1.0 gio-2.0])
+PKG_CHECK_MODULES(CLOCK_PUZZLE, glib-2.0
+cairo
+[gtk+-3.0 gtk-doc check libcanberra-gtk3 json-glib-1.0 clutter-gtk-1.0 clutter-1.0 gio-2.0])
 
 
 

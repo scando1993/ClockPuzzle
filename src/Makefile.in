@@ -368,7 +368,8 @@ uidir = $(pkgdatadir)/ui
 ui_DATA = clock_puzzle.ui
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(cairo_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(CLOCK_PUZZLE_CFLAGS)
 
@@ -387,7 +388,11 @@ clock_puzzle_SOURCES = \
 	game.h
 
 clock_puzzle_LDFLAGS = $(am__append_1) $(am__append_2) $(am__append_3)
-clock_puzzle_LDADD = $(CLOCK_PUZZLE_LIBS)
+clock_puzzle_LDADD = $(CLOCK_PUZZLE_LIBS) \
+	$(cairo_LIBS) \
+	-L/usr/lib/x86_64-linux-gnu \
+	-lm
+
 EXTRA_DIST = $(ui_DATA)
 all: all-am
 

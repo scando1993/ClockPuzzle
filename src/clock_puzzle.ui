@@ -650,6 +650,7 @@ Author: Kevin Cando
           <object class="GtkToolbar" id="ToolbarVtnPrincipal">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="valign">baseline</property>
             <property name="toolbar_style">both</property>
             <property name="icon_size">1</property>
             <child>
@@ -694,7 +695,7 @@ Author: Kevin Cando
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -772,7 +773,7 @@ Author: Kevin Cando
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">3</property>
           </packing>

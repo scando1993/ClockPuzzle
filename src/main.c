@@ -29,6 +29,7 @@ static Private* priv = NULL;
 
 
 GtkBuilder *builder;
+ClutterSize *stage_size;
 
 int
 main (int argc, char *argv[])
@@ -72,8 +73,13 @@ main (int argc, char *argv[])
 	/* Auto-connect signal handlers */
 	gtk_builder_connect_signals (builder, NULL);
 
-	window = create_window ();
+	stage_size = clutter_size_init (clutter_size_alloc (),800,(500-60));
 
+	window = create_window ();
+	
+	//gtk_window_get_default_size (GTK_WINDOW(window),&WINDOW_WIDTH, &WINDOW_HEIGHT);
+
+		
 	priv = g_malloc (sizeof (struct _Private));
 	/* ANJUTA: Widgets initialization for proyectointeligenciaartificial.ui - DO NOT REMOVE */
 

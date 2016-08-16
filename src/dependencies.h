@@ -23,16 +23,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 #include <config.h>
 #include <gtk/gtk.h>
 #include <clutter/clutter.h>
 #include <clutter-gtk/clutter-gtk.h>
+#include <cairo.h>
 
 #include <glib/gi18n.h>
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <glib.h>
 
 gint WINDOW_WIDTH;
 gint WINDOW_HEIGHT;

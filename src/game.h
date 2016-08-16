@@ -28,6 +28,8 @@
 
  
 extern GtkBuilder *builder;
+extern ClutterSize *stage_size;
+
 static ClutterActor *stage;
 
 GtkWidget* create_stage();

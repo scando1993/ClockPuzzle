@@ -9,7 +9,8 @@ ui_DATA = clock_puzzle.ui
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(cairo_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(CLOCK_PUZZLE_CFLAGS)
 
@@ -32,7 +33,10 @@ clock_puzzle_SOURCES = \
 
 clock_puzzle_LDFLAGS =
 
-clock_puzzle_LDADD = $(CLOCK_PUZZLE_LIBS)
+clock_puzzle_LDADD = $(CLOCK_PUZZLE_LIBS) \
+	$(cairo_LIBS) \
+	-L/usr/lib/x86_64-linux-gnu \
+	-lm
 
 
 if PLATFORM_WIN32
