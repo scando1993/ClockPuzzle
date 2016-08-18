@@ -28,7 +28,9 @@ clock_puzzle_SOURCES = \
 	main_window.c \
 	main_window.h \
 	game.c \
-	game.h
+	game.h \
+	clock_number.c \
+	clock_number.h
 
 
 clock_puzzle_LDFLAGS =

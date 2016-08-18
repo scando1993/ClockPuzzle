@@ -39,3 +39,4 @@
 
 gint WINDOW_WIDTH;
 gint WINDOW_HEIGHT;
+

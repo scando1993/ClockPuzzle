@@ -1,12 +1,12 @@
 /***************************************************************************
- *            game.h
+ *            clock_number.h
  *
- *  Sun August 14 10:14:04 2016
+ *  Tue August 16 20:26:59 2016
  *  Copyright  2016  kevin cando
  *  <user@host>
  ****************************************************************************/
 /*
- * game.h
+ * clock_number.h
  *
  * Copyright (C) 2016 - kevin cando
  *
@@ -25,15 +25,29 @@
  */
 
 #include "dependencies.h"
-#include "clock_number.h"
- 
-extern GtkBuilder *builder;
-extern ClutterSize *stage_size;
 
-static ClutterActor *stage;
+typedef ClutterSize ClutterPosition;
 
-GtkWidget* create_stage();
+typedef struct ClockNumber{
+	 ClutterActor *actor;
+	 ClutterContent *canvas;
+	 ClutterSize *size;
+	 ClutterPosition *position;
+	 gint value;
+}ClockNumber;
 
-void new_game();
 
-void generate_clock(gint stages);
+ClockNumber *clock_number_init( gfloat width, 
+                           		gfloat height, 
+                           		gfloat xpos, 
+                           		gfloat ypos);
+
+ClockNumber *create_clock_number(  gfloat xpos, 
+                             	   gfloat ypos, 
+                             	   gfloat width, 
+                             	   gfloat height, 
+                             	   gint number,
+                             	   gint number_of_rect);
+
+void clock_number_change_canvas(ClockNumber *cn, cairo_t *canvas);
+

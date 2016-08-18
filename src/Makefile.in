@@ -106,7 +106,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(uidir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_clock_puzzle_OBJECTS = main.$(OBJEXT) callbacks.$(OBJEXT) \
-	main_window.$(OBJEXT) game.$(OBJEXT)
+	main_window.$(OBJEXT) game.$(OBJEXT) clock_number.$(OBJEXT)
 clock_puzzle_OBJECTS = $(am_clock_puzzle_OBJECTS)
 am__DEPENDENCIES_1 =
 clock_puzzle_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -385,7 +385,9 @@ clock_puzzle_SOURCES = \
 	main_window.c \
 	main_window.h \
 	game.c \
-	game.h
+	game.h \
+	clock_number.c \
+	clock_number.h
 
 clock_puzzle_LDFLAGS = $(am__append_1) $(am__append_2) $(am__append_3)
 clock_puzzle_LDADD = $(CLOCK_PUZZLE_LIBS) \
@@ -488,6 +490,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/clock_number.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/game.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main_window.Po@am__quote@

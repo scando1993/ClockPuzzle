@@ -26,7 +26,6 @@
 
 #include "game.h"
 
-ClutterActor *create_clock_number(gfloat xpos, gfloat ypos, gfloat width, gfloat height, gint number,gint number_of_rect);
 
 ClutterActor *clutter_circle(gfloat xpos,gfloat ypos,gfloat width,gfloat height);
 
@@ -52,20 +51,21 @@ void on_stage_button_press(ClutterStage *stage, ClutterEvent *event, gpointer da
 	clutter_actor_get_size (clicked,&width,&height);
 
 	g_critical("%f,%f",width,height);
+	g_critical("%f,%f",x,y);
 	
     // ignore clicks on the stage
     if (clicked == CLUTTER_ACTOR(stage)) return;
 
-	ClutterActor *circle = clutter_circle(x,y,width,height);
+	//ClutterActor *circle = clutter_circle(x,y,width,height);
 
-	clutter_actor_add_child (stage,circle);
+	//clutter_actor_add_child (stage,circle);
 
 	
     // hide the actor that was clicked
     //clutter_actor_hide(clicked);
-	clutter_actor_show (circle);
+	//clutter_actor_show (circle);
 }
-
+/*
 gboolean draw_circle (ClutterCanvas *canvas,
                       cairo_t *cr,
                       int width,
@@ -132,7 +132,7 @@ void on_actor_resize (ClutterActor *actor,
 		idle_resize_id = clutter_threads_add_timeout (1000, idle_resize, actor);
 }
 
-*/
+*//*
 ClutterActor *clutter_circle(gfloat xpos, 
                              gfloat ypos,
                              gfloat width, 
@@ -165,48 +165,10 @@ ClutterActor *clutter_circle(gfloat xpos,
 
 	return actor;
 }
-
-ClutterActor *create_clock_number(gfloat xpos, 
-                                  gfloat ypos, 
-                                  gfloat width, 
-                                  gfloat height, 
-                                  gint number,
-                                  gint number_of_rect) {
-
-	ClutterActor *figure = clutter_actor_new ();
-	gdouble rotation = 0.0;
-	
-	for(int i = number_of_rect; i > 0; i--){
-		rotation += 360/(2*number_of_rect);
-		
-		ClutterColor col = { rand() % 256, rand() % 256, rand() % 256, i*128/number_of_rect };
-		ClutterActor *rect = clutter_rectangle_new_with_color(&col);
-
-		clutter_actor_set_size(rect, width, height);
-		clutter_actor_set_position(rect, xpos, ypos);
-		clutter_actor_set_anchor_point(rect, width/2, height/2);
-		clutter_actor_set_rotation_angle (rect,CLUTTER_Z_AXIS,rotation)	;
-
-		clutter_actor_add_child (figure,rect);
-
-	}
-
-	ClutterActor *text = clutter_text_new_with_text ("Sans Bold","");
-
-	gchar numberStr[4] = "";
-	sprintf(numberStr,"%d",number);
-
-	clutter_text_set_text (CLUTTER_TEXT(text),numberStr);
-
-	clutter_actor_set_position (text,xpos,ypos);
-	//clutter_actor_set_size (text,width,height);
-	
-	clutter_actor_add_child (figure, text);
-	
-	return figure;
-}
+*/
 
 GtkWidget* create_stage(){
+
 	ClutterColor stage_color = { 255, 255, 255, 255 };
 
 	GtkWidget *clutterStage = gtk_clutter_embed_new ();
@@ -216,6 +178,8 @@ GtkWidget* create_stage(){
 	//stage_size = clutter_size_init (clutter_size_alloc (),800,(500-60));
 	
 	gtk_widget_set_size_request (clutterStage, 800, 550);
+
+	clutter_stage_set_user_resizable (CLUTTER_STAGE(stage), TRUE);
 
 	clutter_actor_set_background_color (stage, &stage_color);
 
@@ -235,20 +199,20 @@ void generate_clock(gint stages){
 	
 	for(int i = 0; i < stages; i++){
 
-		printf("r*cos(%f) = %f\nr*sen(%f)= %f\n",rotation,r*cos(M_PI*rotation/180),rotation,r*sin(M_PI*rotation/180));
-		
 		gfloat x = xo + (float)r*cos(M_PI*rotation/180);
 		gfloat y = yo + (float)r*sin(M_PI*rotation/180);
 
 		gfloat tamx, tamy;
-		printf("%f,%f\n",x,y);
-		
-		ClutterActor *figure = create_clock_number(x,y,size,size,i,24);
-		gchar numberStr[10] = "";
+
+		ClockNumber *cn = create_clock_number(x,y,size,size,i,24);
+		ClutterActor *figure = cn->actor;
+
+		/*gchar numberStr[10] = "";
 		sprintf(numberStr,"(%.3f,%.3f)",x,y);
 
-		//ClutterActor *figure = clutter_text_new_with_text ("Sans Bold",numberStr);
-		//clutter_actor_set_position (figure,x,y);
+		ClutterActor *figure = clutter_text_new_with_text ("Sans Bold",numberStr);
+		clutter_actor_set_position (figure,x,y);
+		*/
 		clutter_actor_get_size (figure, &tamx,&tamy);
 
 		printf ("%f, %f\n",tamx,tamy);
