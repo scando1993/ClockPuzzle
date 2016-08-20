@@ -49,5 +49,13 @@ ClockNumber *create_clock_number(  gfloat xpos,
                              	   gint number,
                              	   gint number_of_rect);
 
+ClockNumber *create_clock_number_spinner( gfloat xpos, 
+                             	   gfloat ypos, 
+                             	   gfloat width, 
+                             	   gfloat height, 
+                             	   gint number,
+                             	   gint number_of_rect);
+
 void clock_number_change_canvas(ClockNumber *cn, cairo_t *canvas);
 
+void on_timeline_new_frame(ClutterTimeline *timeline, gint frame_num, gpointer data);

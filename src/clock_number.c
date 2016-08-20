@@ -74,6 +74,9 @@ gboolean draw_clock_number (ClutterCanvas *canvas,
 
 	int number_of_rect = 24;
 
+	width = width/sqrt(2);
+	height = height/sqrt(2);
+	
 	static int i = 0;
 	
 	//ClutterSize *position = (ClutterSize*) data;
@@ -103,7 +106,7 @@ gboolean draw_clock_number (ClutterCanvas *canvas,
 							g_rand_int_range (rand,0,256), 
 							g_rand_int_range (rand,0,256), 
 							g_rand_int_range (rand,0,256), 
-							255 
+							i*128/number_of_rect  
 		};
 
 		
@@ -117,7 +120,10 @@ gboolean draw_clock_number (ClutterCanvas *canvas,
 		                 height);
 
 		cairo_fill (cr);
+		
+		cairo_translate (cr, width/2, height/2);
 		cairo_rotate (cr,rotation);
+		cairo_translate (cr, -width/2, -height/2);
 /*
 		clutter_actor_set_size(rect, width, height);
 		clutter_actor_set_position(rect, xpos, ypos);
@@ -247,6 +253,7 @@ ClockNumber *create_clock_number( gfloat xpos,
 
 	cn->value = number;
 
+	
 	// resize the canvas whenever the actor changes size 
 //	g_signal_connect (cn->actor, "allocation-changed", G_CALLBACK (on_actor_resize), NULL);
 
@@ -261,3 +268,96 @@ ClockNumber *create_clock_number( gfloat xpos,
 
 	return cn;
 }
+
+ClockNumber *create_clock_number_spinner( gfloat xpos, 
+                             	   gfloat ypos, 
+                             	   gfloat width, 
+                             	   gfloat height, 
+                             	   gint number,
+                             	   gint number_of_rect){
+
+	ClockNumber *cn = clock_number_init(width, height, xpos, ypos);
+
+	GRand *rand = g_rand_new();
+
+	ClutterTimeline *timeline = clutter_timeline_new(60);
+
+	//ClutterActor **rects = malloc(sizeof(ClutterActor*)*number_of_rect);
+	
+	GList *list = NULL;
+	
+	clutter_actor_set_content_scaling_filters (cn->actor,
+		                                 	   CLUTTER_SCALING_FILTER_TRILINEAR,
+		                                 	   CLUTTER_SCALING_FILTER_LINEAR);
+
+	clutter_actor_set_position(cn->actor, xpos, ypos);
+
+	clutter_actor_set_size (cn->actor, width, height);
+
+	gdouble rotation = 0.0;
+	
+	for(int i = number_of_rect; i > 0; i--){
+		ClutterColor col = {	
+					g_rand_int_range (rand,0,256), 
+					g_rand_int_range (rand,0,256), 
+					g_rand_int_range (rand,0,256), 
+					i*128/number_of_rect  
+		};
+		ClutterActor *rect = clutter_rectangle_new_with_color(&col);
+
+		g_list_append(list, rect);
+		
+		clutter_actor_set_size(rect, width, height);
+
+		clutter_actor_set_position(rect, xpos, ypos);
+
+		clutter_actor_set_anchor_point(rect, width/2, height/2);
+
+		clutter_actor_set_rotation_angle (rect,CLUTTER_Z_AXIS,rotation)	;
+
+		clutter_actor_add_child (cn->actor,rect);
+
+		rotation += 360/(2*number_of_rect);
+		
+	}
+
+	g_signal_connect(timeline, "new-frame", G_CALLBACK(on_timeline_new_frame), list);
+
+	clutter_timeline_set_repeat_count (timeline,-1);
+	
+	clutter_timeline_start (timeline);
+	
+	ClutterActor *text = clutter_text_new_with_text ("Sans Bold","");
+
+	gchar numberStr[4] = "";
+	
+	sprintf(numberStr,"%d",number);
+
+	clutter_text_set_text (CLUTTER_TEXT(text),numberStr);
+
+	//clutter_actor_add_child (cn->actor, text);
+
+	clutter_actor_set_position (text,xpos,ypos);
+
+	cn->value = number;
+
+	return cn;
+}
+
+void on_timeline_new_frame(ClutterTimeline *timeline, gint frame_num, gpointer data) {
+
+	GList *list = data;
+	gdouble rotation = 0;
+	gint size = g_list_length (list);
+	GList *l;
+	int i = 0;
+	printf("%d\n",size);
+	for(l = list; l != NULL; l = l->next){
+		//clutter_actor_set_anchor_point(CLUTTER_ACTOR(l->data), 100/2, 100/2);
+		printf("%d\n",i);
+		clutter_actor_set_rotation(CLUTTER_ACTOR(l->data),CLUTTER_Z_AXIS,rotation,0,0,0);
+
+		rotation += 360/(2*size);
+	}
+}
+

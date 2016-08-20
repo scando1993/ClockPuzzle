@@ -174,8 +174,6 @@ GtkWidget* create_stage(){
 	GtkWidget *clutterStage = gtk_clutter_embed_new ();
 	
     stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED(clutterStage));
-
-	//stage_size = clutter_size_init (clutter_size_alloc (),800,(500-60));
 	
 	gtk_widget_set_size_request (clutterStage, 800, 550);
 
@@ -204,7 +202,7 @@ void generate_clock(gint stages){
 
 		gfloat tamx, tamy;
 
-		ClockNumber *cn = create_clock_number(x,y,size,size,i,24);
+		ClockNumber *cn = create_clock_number_spinner(x,y,size,size,i,24);
 		ClutterActor *figure = cn->actor;
 
 		/*gchar numberStr[10] = "";
@@ -215,12 +213,9 @@ void generate_clock(gint stages){
 		*/
 		clutter_actor_get_size (figure, &tamx,&tamy);
 
-		printf ("%f, %f\n",tamx,tamy);
-		
 		clutter_actor_add_child (stage,figure);
 
 		rotation += 360/(stages);
-		printf ("%f\n",rotation);
 	}	
 }
 
